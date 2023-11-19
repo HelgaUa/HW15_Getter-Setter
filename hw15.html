@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Car(make, model, year, speed) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.speed = speed;
+        this.accelerate = (value) => {
+            this.speed += value;
+        };
+        this.brake = (value) => {
+                this.speed -= value;
+            };
+
+        Object.defineProperty(this, 'age', {
+            get() {
+                return this.year;
+            },
+            set(newYear) {
+                let currentYear = new Date().getFullYear();
+
+                if (newYear <= currentYear) {
+                    this.year = newYear;
+                } else {
+                    console.log('There is mistake. Add correct year.')
+                }
+            }
+        })
+
+        Object.defineProperty(this, 'currentSpeed', {
+            get() {
+                return this.speed;
+            },
+            set(newSpeed) {
+                if(newSpeed >= 0) {
+                    this.speed = newSpeed;
+                } else {
+                    console.log('There is mistake. Add correct speed.')
+                }
+            }
+        })
+    }
+
+    const myCar = new Car('Toyota', 'Camry', 2018, 120);
+    console.log(`Car is ${myCar.age} years old.`);
+    myCar.age = 2024;
+    console.log(`Car is ${myCar.age} years old.`);
+    console.log(myCar.currentSpeed);
+    myCar.accelerate(20);
+    console.log(`${myCar.currentSpeed} km/h.`);
+    myCar.brake(10);
+    console.log(`${myCar.currentSpeed} km/h.`);
+
+</script>
+</body>
+</html>
